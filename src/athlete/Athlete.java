@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Athlete {
-    private List<ConstructorAthlete> lista = new ArrayList<>();
+    private Set<ConstructorAthlete> lista = new ArrayList<>();
 
 
     public void readFromFile() {
