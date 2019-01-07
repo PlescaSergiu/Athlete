@@ -3,34 +3,39 @@ package athlete;
 public class ConstructorAthlete {
 
     private String number;
-    private String AthleteName, CountryCode, FirstShootingRange, SecondShooting, ThirShootingeRane;
-    private String SkiTimeResult;
-    private int totalTime, penalty;
+    private String athleteName;
+    private String countryCode;
+    private String skiTimeResult;
+    private String firstShooting;
+    private String secondShooting;
+    private String thirdShooting;
+    private int totalTime;
+    private int penalty;
 
 
-    public ConstructorAthlete(String number, String athleteName, String countryCode, String firstShootingRange, String secondShooting, String thirShootingeRane, String skiTimeResult) {
+    public ConstructorAthlete(String number, String athleteName, String countryCode, String skiTimeResult, String firstShooting, String secondShooting, String thirdShooting) {
         this.number = number;
-        this.AthleteName = athleteName;
-        this.CountryCode = countryCode;
-        this.FirstShootingRange = firstShootingRange;
-        this.SecondShooting = secondShooting;
-        this.ThirShootingeRane = thirShootingeRane;
-        this.SkiTimeResult = skiTimeResult;
+        this.athleteName = athleteName;
+        this.countryCode = countryCode;
+        this.skiTimeResult = skiTimeResult;
+        this.firstShooting = firstShooting;
+        this.secondShooting = secondShooting;
+        this.thirdShooting = thirdShooting;
         getTime();
     }
 
-
     public void getTime( ) {
 
-        String[] time = SkiTimeResult.split(":");
+
+        String[] time = skiTimeResult.split(":");
         int min = Integer.parseInt(time[0]);
         int sec = Integer.parseInt(time[1]);
 
-        String shoot = FirstShootingRange + SecondShooting + ThirShootingeRane;
+        String shoot = firstShooting + secondShooting + thirdShooting;
 
-        for (int j = 0; j < shoot.length(); j++) {
-            if (shoot.charAt(j) == 'o') {
-                penalty += 10;
+        for (int i = 0; i < shoot.length(); i++) {
+            if (shoot.charAt(i) == 'o') {
+                 penalty += 10;
             }
         }
 
@@ -45,10 +50,10 @@ public class ConstructorAthlete {
     public String toString() {
         return "ConstructorAthlete{" +
                 "number='" + number + '\'' +
-                ", AthleteName='" + AthleteName + '\'' +
-                ", CountryCode='" + CountryCode + '\'' +
-                ", SkiTimeResult='" + SkiTimeResult + '\'' +
-                ", totalTime=" + totalTime +
+                ", athleteName='" + athleteName + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", skiTimeResult='" + skiTimeResult + '\'' +
+                ", totalTime=" + (totalTime / 60) + ":" + (totalTime % 60) + " penalty=" + penalty +
                 '}';
     }
 }

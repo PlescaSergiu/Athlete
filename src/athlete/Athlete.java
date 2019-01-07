@@ -1,64 +1,43 @@
 package athlete;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
+
 
 public class Athlete {
-    private Set<ConstructorAthlete> lista = new ArrayList<>();
-
+    private Set<ConstructorAthlete> lista = new TreeSet<ConstructorAthlete>(new TimeComparator());
 
     public void readFromFile() {
 
         File file = new File("Athlete.csv");
 
-        try (Reader reader = new FileReader(file.getAbsolutePath())) {
-            char[] buffer = new char[4];
-            int read = reader.read(buffer);
+        try {
 
-            StringBuilder text = new StringBuilder();
-            do {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            String[] date = null;
+            while ((line = br.readLine()) != null) {
+                date = line.split(",");
+                lista.add(new ConstructorAthlete(date[0], date[1], date[2], date[3], date[4], date[5], date[6]));
+            }
 
-                text.append(String.copyValueOf(buffer));
-                read = reader.read(buffer);
-
-            } while (read != -1);
-
-            List<ConstructorAthlete> lista = addToList(text.toString());
-            System.out.println(text);
-
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
 
         }
 
     }
 
+    public void printResults() {
 
-    public List<ConstructorAthlete> addToList(String allText) {
-        List<ConstructorAthlete> lista = new ArrayList<>();
-        String[] lis = allText.split("\n");
-
-        for (String line : lis) {
-            String[] indicator = line.split(",");
-            ConstructorAthlete person = new ConstructorAthlete(indicator[0], indicator[1], indicator[2],
-                    indicator[3], indicator[4], indicator[5], indicator[6]);
-
-            lista.add(person);
+        System.out.println("Results _-_: ");
+        int i = 1;
+        for (ConstructorAthlete athlete : lista) {
+            System.out.println(i + " " + athlete);
+            i++;
         }
-        return lista;
-
-
     }
 
-    public List<ConstructorAthlete> getLista() {
-        return lista;
-    }
 
 
 
